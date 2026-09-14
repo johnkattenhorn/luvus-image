@@ -51,9 +51,12 @@ luvus module link /path/to/luvus-image
 - In the page: arrows or `n`/`p` walk that list, `1`–`9` jump to dock
   row 1–9.
 - Switching workspaces: the watcher polls `workspace list` every 0.4s
-  and rescans when `active` cwd changes. Module hooks do not run
-  `pane.focused`, and `luvus events` while idle is almost only
-  `terminal.output_ready`. The header is `IMAGES · scanning <folder>…`
+  and rescans when `active` cwd changes. Luvus has no focus event to
+  subscribe to — the documented set is `pane.created`, `pane.closed`,
+  `pane.agent_status_changed` and the workspace/tab/task lifecycle, so a
+  `pane.focused` hook was declared here for a while and never fired. The
+  event stream is no help either: while idle it is almost only
+  `terminal.output_ready`. Polling is the only option today. The header is `IMAGES · scanning <folder>…`
   then `IMAGES · <folder>`; a bottom-bar **IMG** chip shows working
   then done. `runs/` is skipped so generate output does not bury sheets.
 - Right-click a WORKSPACES row → Refresh image list.

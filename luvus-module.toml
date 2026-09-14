@@ -34,10 +34,6 @@ on = "workspace.closed"
 command = ["python3", "dock.py"]
 
 [[events]]
-on = "pane.focused"
-command = ["python3", "dock.py"]
-
-[[events]]
 on = "tab.created"
 command = ["python3", "dock.py"]
 
