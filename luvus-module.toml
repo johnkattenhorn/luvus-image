@@ -1,0 +1,80 @@
+id = "image.preview"
+name = "Image Preview (stopgap)"
+version = "0.3.0"
+min_luvus_version = "0.8.3"
+description = "STOPGAP until RizRiyz/luvus#324 (kitty in panes) and #236 (open in the desktop app). IMAGES dock plus a local browser gallery; Luvus still cannot paint a PNG itself."
+platforms = ["macos", "linux"]
+
+[[docks]]
+id = "images"
+title = "IMAGES"
+placement = "sidebar.right"
+
+[[bars]]
+id = "images"
+title = "Images"
+region = "bottom-right"
+priority = 80
+
+[[panes]]
+id = "view"
+title = "Image"
+placement = "tab"
+command = ["python3", "view.py"]
+
+[[startup]]
+command = ["python3", "dock.py"]
+
+[[events]]
+on = "workspace.created"
+command = ["python3", "dock.py"]
+
+[[events]]
+on = "workspace.closed"
+command = ["python3", "dock.py"]
+
+[[events]]
+on = "pane.focused"
+command = ["python3", "dock.py"]
+
+[[events]]
+on = "tab.created"
+command = ["python3", "dock.py"]
+
+[[actions]]
+id = "refresh"
+title = "Refresh image list"
+contexts = ["workspace"]
+command = ["python3", "dock.py"]
+
+[[actions]]
+id = "open"
+title = "Open image in browser"
+command = ["python3", "browser.py"]
+
+[[actions]]
+id = "open-selection"
+title = "View selected path in the browser"
+contexts = ["pane"]
+command = ["python3", "browser.py"]
+
+[[actions]]
+id = "open-pane"
+title = "Open image in a Luvus pane (blocky)"
+command = ["python3", "open.py"]
+
+[[settings]]
+key = "depth"
+title = "Scan depth"
+type = "number"
+default = 4
+min = 1
+max = 8
+
+[[settings]]
+key = "limit"
+title = "Images in the dock"
+type = "number"
+default = 40
+min = 4
+max = 120
