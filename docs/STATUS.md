@@ -32,6 +32,9 @@ session moved it along by arguing the case rather than by writing code.
 
 Both PRs are by rsaulo, who also filed #207.
 
+The reasoning behind the module's shape — browser over pane, the parallel dock
+list, the poll, the loopback-only server — is in `docs/DECISIONS.md`.
+
 ## What we told #207, and why it is worth keeping here
 
 Each of these is a measurement, not an opinion, and each one is the reason a
