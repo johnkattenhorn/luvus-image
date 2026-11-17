@@ -17,6 +17,7 @@ from pathlib import Path
 from http_view import save_gallery
 from scan import labelled
 from state import dir as state_dir
+from version import VERSION
 
 LUVUS = os.environ.get("LUVUS_BIN_PATH", "luvus")
 DOCK = "images"
@@ -98,6 +99,9 @@ def watcher_alive() -> bool:
 
 
 def main() -> int:
+    if "--version" in sys.argv:
+        print(f"luvus-image {VERSION}")
+        return 0
     if not watcher_alive():
         from watch import ensure
         try:
@@ -136,6 +140,7 @@ def main() -> int:
                     "action": "open",
                     "value": str(path),
                 })
+    rows.append({"text": f"v{VERSION}", "tone": "muted"})
     ms = int((__import__("time").perf_counter() - t0) * 1000)
     try:
         push(title, rows, state="done")
